@@ -7,7 +7,7 @@ $mysqli = new mysqli('localhost', 'root', 'root', 'todo');
 			. $mysqli->connect_error);
 }
 else {
-	echo "Connection made";
+	// echo "Connection made";
 }
 $mysqli->close();
 
