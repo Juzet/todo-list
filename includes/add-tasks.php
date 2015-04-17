@@ -17,7 +17,9 @@
 	$query = "SELECT * FROM tasks WHERE task='task' and date='date' and time='time' ";
 
 	// logic to show our tasks
+	// taking the results of the query
 	if($result = $mysqli->query($query)) {
+		// start an array
 		while ($row = $result->fetch_assoc()) {
 			// making task_id equal to row id
 			$task_id = $row['id'];
