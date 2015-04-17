@@ -16,4 +16,18 @@
 	// want query to query the tasks we have
 	$query = "SELECT * FROM tasks WHERE task='task' and date='date' and time='time' ";
 
+	// logic to show our tasks
+	if($result = $mysqli->query($query)) {
+		while ($row = $result->fetch_assoc()) {
+			// making task_id equal to row id
+			$task_id = $row['id'];
+			// making task_name equal to row 
+			$task_name = $row['task'];
+		}
+	}
+	// closing the connection
+	$mysqli->close();
+
+	echo '<li><span>' .$task_name. '</span><img id="'.$task_id.'" class="delete-button" width="10px" src="images/close.svg" /></li> 
+
 ?>
