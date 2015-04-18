@@ -3,8 +3,8 @@
 <head>
 	<title>Simple To-Do List</title>
 	<link rel="stylesheet" type="text/css" href="css/main.css">
-	<link rel="stylesheet" type="text/css" href="css/normalize.css">
-	<link rel="stylesheet" type="text/css" href="css/reset.css">
+	<!-- <link rel="stylesheet" type="text/css" href="css/normalize.css">
+	<link rel="stylesheet" type="text/css" href="css/reset.css"> -->
 </head>
 <body>
 	<div class="wrap">
@@ -53,9 +53,9 @@
 			var new_task = $('.add-new-task input[name=new-task]').val();
 
 			if (new_task != '') {
-				$.post('includes/add-task.php', {task: new_task}, function(data) {
+				$.post('includes/add-tasks.php', {task: new_task}, function(data) {
 					$('include/add-new-task input[name=new-task']).val();
-						$(data).appendTo('task-list ul').hide().fadeIn();
+						$(data).appendTo('.task-list ul').hide().fadeIn();
 				})
 			}
 			return false;
