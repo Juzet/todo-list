@@ -8,14 +8,34 @@
 	<div class="wrap">
 		<div class="task-list">
 			<ul>
-				<?php require ("includes/connect.php"); ?>
+			<!-- requiring the connect file to this file -->
+				<?php require ("includes/connect.php"); 
+				// creating new mysqli
+					$mysqli = new mysqli('localhost', 'root', 'root', 'todo');
+					// is selecting from all tasks 
+					$query = "SELECT * FROM task ORDER BY date ASC, time ASC";
+
+					if ($result = $mysqli->query($query)) {
+						// we want all variables to go to this function
+						$numrows = $result->num_rows;
+						if($numrows>0) {
+							// loop
+							while($row = $result->fetch_assoc()) {
+								$task_id = $row["id"];
+								$task_name = $row["tasks"];
+							}
+						}
+					}
+				?>
 			</ul>
 	</div>
 	<form class="add-new-task" autocomplete="off">
+	<!-- this will pop up on the screen  -->
 		<input type="text" name="new-task" placeholder="Add new item..."/>
 	</form>
 	</div>
 </body>
+<!-- adding the jquery script tag -->
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script>
 	add_task(); 
@@ -33,5 +53,17 @@
 			return false;
 		});
 	}
+	// when you click on this button there will be an annoymous function running
+	$('.delete-button').click(function() {
+		var current_element = $(this);
+		var task_id = $(this).attr('id');
+		// made two variables and called them
+		$.post('includes/delete-task.php', {id: task_id}, function(){
+		// fading out fast
+		current_element.parent().fadeOut("fast", function()){
+			$(this).remove();
+		});
+	});
+});
 </script>
 </html>
